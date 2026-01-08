@@ -6,6 +6,5 @@
     "name": "Chad Lee"
   },
   "license": "MIT",
-  "keywords": ["prompt", "quality", "brain-rot", "productivity"],
-  "commands": ["score"]
+  "keywords": ["prompt", "quality", "brain-rot", "productivity"]
 }

@@ -22,10 +22,11 @@ BrainCure gives you real-time feedback on your prompt quality, encouraging you t
 
 ## 📦 Installation
 
-### From Marketplace
+### From Claude Code
 
 ```bash
-claude plugin add brain-cure
+/plugin marketplace add chadbyte/lab
+/plugin install brain-cure
 ```
 
 ### From Source
