@@ -70,20 +70,24 @@ Details: [FRAMEWORK.md](FRAMEWORK.md)
 
 ### 4. Response Format
 
-At the end of every response:
+At the end of every response, use ASCII-style output (not markdown):
 ```
-- 📊 BrainCure: X/10 [emoji] [title]
-  - Session avg: X.X
-- 📝 [Claude's own feedback]
+⏺ 📊 BrainCure: X/10 [emoji] [title]
+  Session avg: X.X
+
+⏺ 📝 [Claude's own feedback]
 ```
 
 When Butler Mode detected:
 ```
-- 📊 BrainCure: X/10 [emoji] [title]
-  - 🛎️ Butler Mode
-  - Session avg: X.X
-- 📝 [feedback]
+⏺ 📊 BrainCure: X/10 [emoji] [title]
+  🛎️ Butler Mode
+  Session avg: X.X
+
+⏺ 📝 [feedback]
 ```
+
+**Important**: Do NOT use markdown separators like `---`. Use `⏺` as bullet prefix to match Claude Code's native output style.
 
 ### 5. Feedback Generation Rules
 
@@ -105,39 +109,45 @@ Use Memory Tool to record session scores in `/memories/prompt_scores.json`.
 
 **10 points (Tony Stark):**
 ```
-- 📊 BrainCure: 10/10 🦸 Tony Stark
-  - Session avg: 8.2
-- 📝 Perfect!
+⏺ 📊 BrainCure: 10/10 🦸 Tony Stark
+  Session avg: 8.2
+
+⏺ 📝 Perfect!
 ```
 
 **7 points (Sharp):**
 ```
-- 📊 BrainCure: 7/10 🧠 Sharp
-  - Session avg: 6.5
-- 📝 Good. Just needs clearer success criteria.
+⏺ 📊 BrainCure: 7/10 🧠 Sharp
+  Session avg: 6.5
+
+⏺ 📝 Good. Just needs clearer success criteria.
 ```
 
 **Butler Mode (6 points):**
 ```
-- 📊 BrainCure: 6/10 🎯 Focused
-  - 🛎️ Butler Mode
-  - Session avg: 7.1
-- 📝 You could probably do this yourself :)
+⏺ 📊 BrainCure: 6/10 🎯 Focused
+  🛎️ Butler Mode
+  Session avg: 7.1
+
+⏺ 📝 You could probably do this yourself :)
 ```
 
 **Hail Mary (2 points):**
 ```
-- 📊 BrainCure: 2/10 😶‍🌫️ Foggy
-  - Session avg: 4.3
-- 📝 Just an error dump means I have to guess too. Tell me where you were and what you were doing when this happened.
+⏺ 📊 BrainCure: 2/10 😶‍🌫️ Foggy
+  Session avg: 4.3
+
+⏺ 📝 Just an error dump means I have to guess too. Tell me where you were and what you were doing when this happened.
 ```
 
 ## Slash Commands
 
+- `/setup-global` - Add BrainCure rule to ~/.claude/CLAUDE.md (all projects)
+- `/setup-local` - Add BrainCure rule to project's CLAUDE.md (this project only)
 - `/score` - View session stats
-- `/score reset` - Reset session
-- `/score help` - Explain scoring system
-- `/score setup` - Add BrainCure rule to CLAUDE.md
+- `/reset` - Reset session scores
+- `/help` - Explain scoring system
+- `/savage` - Enable savage mode - drill sergeant style (scoring unchanged)
 
 ## Notes
 

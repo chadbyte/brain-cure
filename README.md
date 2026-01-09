@@ -1,3 +1,5 @@
+![BrainCure](brain-cure.jpg)
+
 # 🧠 BrainCure
 
 **Stop outsourcing your thinking to AI.** BrainCure is a Claude Code plugin that scores your prompts and helps you stay in the driver's seat of your projects.
@@ -18,6 +20,7 @@ BrainCure gives you real-time feedback on your prompt quality, encouraging you t
 - **Automatic Scoring** - Every prompt gets a 0-10 score
 - **Session Tracking** - Monitor your average across a session
 - **Actionable Feedback** - Know exactly how to improve
+- **Drill Sergeant Mode** - Forrest Gump style feedback 🎖️
 - **Zero Config** - Works immediately after installation
 
 ## 📦 Installation
@@ -27,6 +30,18 @@ BrainCure gives you real-time feedback on your prompt quality, encouraging you t
 ```bash
 /plugin marketplace add chadbyte/lab
 /plugin install brain-cure
+```
+
+### Setup
+
+After installation, add BrainCure to your projects:
+
+```bash
+# For all projects (global)
+/brain-cure:setup-global
+
+# For current project only
+/brain-cure:setup-local
 ```
 
 ### From Source
@@ -44,33 +59,29 @@ claude plugin install ./brain-cure
 claude plugin list
 ```
 
-#### Development Setup
-
-```bash
-# Symlink for instant updates during development
-ln -s /path/to/brain-cure/skills/brain-cure ~/.claude/skills/brain-cure
-
-# Changes apply after restarting Claude Code
-```
-
 ## 🚀 Usage
 
 Once installed, BrainCure automatically evaluates every prompt:
 
 ```
 ⏺ 📊 BrainCure: 8/10 🦾 Commander
-  ⎿ Session avg: 7.2
+  Session avg: 7.2
+
 ⏺ 📝 Nice!
 ```
 
 ### Commands
 
+All commands use the `/brain-cure:` prefix:
+
 | Command | Description |
 |---------|-------------|
-| `/score` | View session statistics |
-| `/score reset` | Reset session tracking |
-| `/score help` | Explain the scoring system |
-| `/score setup` | Add BrainCure rule to CLAUDE.md |
+| `/brain-cure:score` | View session statistics |
+| `/brain-cure:reset` | Reset session tracking |
+| `/brain-cure:help` | Explain the scoring system |
+| `/brain-cure:setup-global` | Add BrainCure to ~/.claude/CLAUDE.md (all projects) |
+| `/brain-cure:setup-local` | Add BrainCure to project's CLAUDE.md |
+| `/brain-cure:savage` | Enable savage mode (drill sergeant) 🎖️ |
 
 ## 📊 Scoring System
 
@@ -97,11 +108,49 @@ Butler Mode: base 0 points → max 9 points
 
 BrainCure evaluates prompts on three pillars:
 
-1. **Context** - Did you provide enough background?
-2. **Constraints** - Did you set clear boundaries?
-3. **Ownership** - Are you directing, or just delegating?
+**For Requests (tasks):**
+| Pillar | Question |
+|--------|----------|
+| Origin | Do you know what the problem is? |
+| Destination | Do you know what you want? |
+| Boundary | Do you have success/failure criteria? |
 
-The plugin automatically adds its evaluation rule to your project's CLAUDE.md on session start.
+**For Questions (exploration):**
+| Pillar | Question |
+|--------|----------|
+| Hypothesis | Do you have your own theory? |
+| Scope | Where are you looking? |
+| Context | Why are you curious about this? |
+
+### Butler Mode 🛎️
+
+When you ask AI to do something you could easily do yourself (rename a variable, add an import), Butler Mode activates and caps your base score at 0.
+
+## 🎖️ Drill Sergeant Mode
+
+Want feedback from a Marine Corps drill instructor? Enable drill sergeant mode:
+
+```
+/brain-cure:savage
+```
+
+Scoring stays fair. But feedback comes Forrest Gump style:
+
+**Good prompt (8/10):**
+```
+⏺ 📊 BrainCure: 8/10 🦾 Commander
+  Session avg: 7.2
+
+⏺ 📝 OUTSTANDING, PRIVATE! That's the finest prompt I've seen all day!
+```
+
+**Bad prompt (2/10):**
+```
+⏺ 📊 BrainCure: 2/10 😶‍🌫️ Foggy
+  Session avg: 5.2
+
+⏺ 📝 WHAT IS THIS, PRIVATE?! You call this a prompt?! WHERE'S YOUR CONTEXT?!
+```
 
 ## 🤝 Contributing
 
@@ -112,19 +161,24 @@ Contributions are welcome! See the source repository for development guidelines.
 ```
 brain-cure/
 ├── .claude-plugin/
-│   └── plugin.json          # Plugin manifest
+│   └── plugin.json           # Plugin manifest
 ├── hooks/
-│   ├── hooks.json           # SessionStart hook config
-│   └── ensure-claude-md.sh  # Auto-setup script
+│   ├── hooks.json            # SessionStart hook config
+│   └── ensure-claude-md.sh   # Auto-setup script
 ├── skills/
 │   └── brain-cure/
-│       ├── SKILL.md         # Main instructions
-│       ├── FRAMEWORK.md     # Evaluation criteria
-│       ├── EXAMPLES.md      # Example prompts
+│       ├── SKILL.md          # Main instructions
+│       ├── FRAMEWORK.md      # Evaluation criteria
+│       ├── EXAMPLES.md       # Example prompts
 │       └── scripts/
-│           └── score.py     # Score calculation
+│           └── score.py      # Score calculation
 ├── commands/
-│   └── score.md             # /score slash command
+│   ├── score.md              # /score command
+│   ├── reset.md              # /reset command
+│   ├── help.md               # /help command
+│   ├── setup-global.md       # /setup-global command
+│   ├── setup-local.md        # /setup-local command
+│   └── roast.md              # /roast command
 └── README.md
 ```
 
